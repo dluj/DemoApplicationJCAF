@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="DemoApplication" default="build" basedir=".">
+	<property name="src" value="src" />
+	<property name="build" value="build" />	
+	<property name="deploy" value="framework" />
+	<property name="jar" value="${deploy}/dk.itu.jcafdemo.jar" />
+	<property name="lib" value="framework" />
+
+	<path id="_srcpath">
+		<pathelement path="${src}" />
+	</path>
+
+	<target name="mkbuild">
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="compile_all" depends="clean, mkbuild">
+		<javac source="1.6" destdir="${build}" debug="on" classpath="${lib}/jcaf.v15.jar">
+			<src path="${src}" /> 
+		  	<compilerarg line="-Xlint:unchecked" /> 
+		 	<compilerarg line="-Xlint:deprecation" /> 
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile_all">
+		<jar destfile="${jar}" basedir="${build}" excludes="package?cache/,cache?files/">
+			<manifest>
+	  			<attribute name="Built-By" value="ksza" /> 
+	  			<attribute name="Sealed" value="true" />
+	  		</manifest>
+	  	</jar>
+	</target>
+	
+	<target name="build" depends="jar">
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}" />
+	</target>
+</project>
