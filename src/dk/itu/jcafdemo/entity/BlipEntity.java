@@ -55,7 +55,7 @@ public class BlipEntity extends Person{
 	
 	@Override
 	public void contextChanged(ContextEvent event) {
-		System.out.println("Something changed --> BLIP Location: "+ location);
+		System.out.println("Something changed --> BLIP Entity: "+ location);
 	}
 	@Override
 	public String getEntityInfo() {

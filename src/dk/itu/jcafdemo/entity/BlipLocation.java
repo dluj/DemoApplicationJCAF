@@ -11,7 +11,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-public class BlipLocation {
+import dk.pervasive.jcaf.ContextEvent;
+import dk.pervasive.jcaf.entity.GenericEntity;
+
+public class BlipLocation extends GenericEntity {
 
 	private List<BlipEntity> terminals = new ArrayList<BlipEntity>();
 	private List<BlipEntity> new_terminals = new ArrayList<BlipEntity>();
@@ -21,12 +24,12 @@ public class BlipLocation {
 	private String url_string = "http://pit.itu.dk:7331/terminals-in/";
 	
 	public BlipLocation(){
-//		location = "itu.zone0.zonedorsyd";
-
+		super("daniel@itu.dk");
 		location = "itu.zone0.zonedorsyd";
 	}
 	
 	public BlipLocation(String location){
+		super();
 		this.location = location;
 	}
 	
@@ -108,5 +111,13 @@ public class BlipLocation {
 		return deleted_terminals;
 	}
 	
+	@Override
+	public void contextChanged(ContextEvent event) {
+		System.out.println("Something changed --> BLIP Location: "+ location);
+	}
+	@Override
+	public String getEntityInfo() {
+		return "BlipLocation location -> "+location;
+	}
 
 }
